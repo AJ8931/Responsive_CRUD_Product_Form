@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Product-catalog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="Style.css">
+</head>
+  <body>
+    <div class="text-center">
+        <h3>        Product Details </h3>
+
+    </div>
+    <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="Product-Name">
+                            product Name:
+                        </label>
+                        <div class="inputt">
+                            <input type="text" class="PName" id="PName" name="PName">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Product-Name">
+                            Product Category:
+                        </label>
+                        <div class="inputt">
+                            <select name="ProductCategory" id="ProductCategory">
+                            <option> </option>
+                            <option> Clothes </option> 
+                            <option> Grocery </option> 
+                            <option> Electronics</option> 
+                            <option> Other</option> 
+                        </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="Product-Name">
+                    Manufacturer:
+                </label>
+                <div class="inputt">
+                    <input type="text" class="Manufacturer" id="Manufacturer">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="Product-Name">
+                    Brand Name:
+                </label>
+                <div class="inputt">
+                    <input type="text" class="BrandName" id="BrandName">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="Product-Name">
+                    Product-ID:
+                </label>
+                <div class="inputt">
+                    <input type="text" class="Product-ID" id="Product-ID">
+                </div>
+            </div>
+                <div class="col-sm-6">
+                    <label for="Product-Name">
+                        Product Manufacture Date:
+                    </label>
+                    <div class="inputt">
+                    <input type="date" class="Manufacture-Date"  id="Manufacture-Date">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="Product-Name">
+                    Product Expiry Date:
+                </label>
+                <div class="inputt">
+                    <input type="date" class="Expiry-Date" id="Expiry-Date">
+                </div>
+            </div>
+            <div class="col-sm-6">
+            <label for="Product-Name">
+                Discription:
+            </label>
+            <div class="inputt">
+                <textarea name="discrip" id="discrip" ></textarea>
+            </div>
+        </div>
+        <div class="col-md-3">
+                <button  class="btn btn-primary" id="addP" >
+                    Add Product:
+                </button>
+            </div>
+            <div class="col-md-3" >
+            <button  class="btn btn-primary" id="DeleteProduct">
+                    Delete Product:
+                </button>
+            </div>
+        <div class="col-md-3">
+                <button type="submit" class="btn btn-success" id="UpdateProduct">
+                    Update Product:
+                </button>
+            </div>
+        <div class="col-md-3">
+                <button class="btn btn-success" id="searchProduct" >
+                    Search Product:
+                </button>
+        </div>
+            </div>
+    
+</div>
+ 
+</div>
+<script src="database-validation.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <---------------------------------import configuration----------------------------/-> --->
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+      
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+      
+        // TODO: Add SDKs for Firebase products that you want to use
+      
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+      
+        // Your web app's Firebase configuration
+      
+        const firebaseConfig = {
+      
+          apiKey: "AIzaSyDpdCptXEg2BrZ17OiTmVTivY-GGt1Me80",
+      
+          authDomain: "firstfirebase-2726b.firebaseapp.com",
+      
+          projectId: "firstfirebase-2726b",
+      
+          storageBucket: "firstfirebase-2726b.appspot.com",
+      
+          messagingSenderId: "440476317362",
+      
+          appId: "1:440476317362:web:ac1d0717443df3ed043bab"
+      
+        };
+      
+      
+        // Initialize Firebase
+      
+        const app = initializeApp(firebaseConfig);
+        import{getDatabase, ref, set, get, child, update, remove} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js" ;
+
+        const DB=getDatabase();
+        //---------------Refrences----------------//
+        var productnamebox=document.getElementById('PName');
+        var productcat=document.getElementById('ProductCategory');
+        var manufbox=document.getElementById('Manufacturer');
+        var brandnamebox=document.getElementById('BrandName');
+        var idnamebox=document.getElementById('Product-ID');
+        var manudatebox=document.getElementById('Manufacture-Date');
+        var expirydatebox=document.getElementById('Expiry-Date');
+        var discripbox=document.getElementById('discrip');
+      
+
+        //--------------------------Insert Data Function---------------------//
+    function insertData(){
+        if(validate()==true){
+        set(ref(DB, "the product details/"+ idnamebox.value),{
+            Nameofproduct: productnamebox.value,
+            ProductCategory: productcat.value,
+            manufacturer: manufbox.value,
+            brandName: brandnamebox.value,
+            IDNamebox: idnamebox.value,
+            ManufactureDate:manudatebox.value,
+            expirydate: expirydatebox.value,
+            Discription: discripbox.value
+        })
+        .then(()=>{
+            alert("Data Stored Successfully");
+        })
+        .catch((error)=>{
+            alert("unSuccesfull, Error"+error);
+    });
+}
+
+    }
+    //-------------------Select Data Function------------>
+    function SelectData(){
+        const dbref =ref(DB);
+
+        get(child(dbref,"the product details/"+ idnamebox.value)).then((snapshot)=>{
+            if(snapshot.exists()){
+                console.log(snapshot.val())
+
+            productnamebox.value=snapshot.val().NameofProduct;
+            productcat .value=snapshot.val().ProductCategory;
+            manufbox.value=snapshot.val().manufacturer;
+            brandnamebox.value=snapshot.val().brandName;
+            idnamebox.value=snapshot.val().IDNamebox;
+            manudatebox.value=snapshot.val().ManufactureDate;
+            expirydatebox.value=snapshot.val().expirydate;
+            discripbox.value=snapshot.val().Discription;
+            }
+            else {
+                alert("No data found")
+
+            }
+        }).catch((error)=>{
+            alert("unSuccesfull, Error"+error);
+    });
+    }
+    //------------------update function--------//
+     function updateData(){
+        update(ref(DB, "the product details/"+ idnamebox.value),{
+            Nameofproduct: productnamebox.value,
+            ProductCategory: productcat.value,
+            manufacturer: manufbox.value,
+            brandName: brandnamebox.value,
+            ManufactureDate:manudatebox.value,
+            expirydate: expirydatebox.value,
+            Discription: discripbox.value
+        })
+        .then(()=>{
+            alert("Data Stored Successfully");
+        })
+        .catch((error)=>{
+            alert("unSuccesfull, Error"+error);
+    });
+
+     }
+     //-------------------DeleteData------------------//
+     function DeleteData(){
+        remove(ref(DB, "the product details/"+ idnamebox.value),{
+        })
+        .then(()=>{
+            alert("Data Removed Successfully");
+        })
+        .catch((error)=>{
+            alert("unSuccesfull, Error"+error);
+    });
+
+
+     }
+
+    //-----------assign Events to BTns---------------//
+    addP.addEventListener('click', insertData);
+    searchProduct.addEventListener('click', SelectData);
+    UpdateProduct.addEventListener('click', updateData);
+    DeleteProduct.addEventListener('click', DeleteData);
+
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>
